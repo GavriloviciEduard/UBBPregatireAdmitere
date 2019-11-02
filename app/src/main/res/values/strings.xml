@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">UBBPregatireAdmitere</string>
+    <string name="quizzes">Quizzes</string>
+    <string name="profile">Profile</string>
+    <string name="problems">Problems</string>
+    <string name="forum">Forum</string>
 </resources>
