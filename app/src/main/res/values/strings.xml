@@ -5,4 +5,8 @@
     <string name="logo_desc">logo of the app</string>
     <string name="login">Login</string>
     <string name="forgot_your_password">Forgot your password?</string>
+    <string name="quizzes">Quizzes</string>
+    <string name="profile">Profile</string>
+    <string name="problems">Problems</string>
+    <string name="forum">Forum</string>
 </resources>
