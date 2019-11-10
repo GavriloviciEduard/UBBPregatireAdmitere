@@ -83,7 +83,9 @@ class LogInActivity : AppCompatActivity()
 
         else
         {
-            logInServerRequest()
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            //logInServerRequest()
         }
     }
 
