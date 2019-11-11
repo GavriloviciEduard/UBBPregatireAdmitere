@@ -27,7 +27,7 @@ class LogInActivity : AppCompatActivity()
 
     private fun setListeners()
     {
-        bind<EditText>(R.id.textEditUserName).onFocusChangeListener = View.OnFocusChangeListener{
+        bind<EditText>(R.id.textEditUserName).onFocusChangeListener = View.OnFocusChangeListener {
                 v, hasFocus ->  if (!hasFocus)  { hideKeyboard(v) } }
         bind<EditText>(R.id.textEditPassword).onFocusChangeListener = View.OnFocusChangeListener {
                 v, hasFocus ->  if (!hasFocus)  { hideKeyboard(v) } }
