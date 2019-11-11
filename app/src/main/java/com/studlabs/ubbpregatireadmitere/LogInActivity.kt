@@ -6,6 +6,7 @@ import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
 import androidx.annotation.IdRes
@@ -34,10 +35,9 @@ class LogInActivity : AppCompatActivity()
 
     private fun hideKeyboard(view: View)
     {
-        //TODO
-        //val inputMethodManager =
-            //getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-        //inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+        val inputMethodManager =
+            getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
     private fun <T : View> Activity.bind(@IdRes res : Int) : T
@@ -83,14 +83,14 @@ class LogInActivity : AppCompatActivity()
 
         else
         {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            //logInServerRequest()
+            logInServerRequest()
         }
     }
 
     private fun logInServerRequest()
     {
         Toast.makeText(this, "Not Implemented yet!", Toast.LENGTH_SHORT).show()
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
     }
 }
