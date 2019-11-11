@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_background"
+    tools:context=".LogInActivity"
+    android:clickable="true"
+    android:focusableInTouchMode="true"
+    android:focusable="true">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        tools:ignore="UselessParent">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:clickable="true"
+        android:focusableInTouchMode="true"
+        tools:ignore="UselessParent"
+        android:focusable="true">
+
+        <ImageView
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:src="@drawable/logo_cs"
+            android:layout_gravity="center_horizontal"
+            android:contentDescription="@string/logo_desc" />
+
+        <EditText
+            android:id="@+id/textEditUserName"
+            android:layout_marginTop="20dp"
+            android:drawableStart="@drawable/icon_user"
+            android:drawablePadding="20dp"
+            android:hint="@string/username"
+            android:textSize="20sp"
+            android:gravity="bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/login_edit_background"
+            android:padding="10dp"
+            android:importantForAutofill="no"
+            tools:ignore="TextFields" />
+
+        <EditText
+            android:id="@+id/textEditPassword"
+            android:layout_marginTop="10dp"
+            android:drawableStart="@drawable/icon_password"
+            android:drawablePadding="20dp"
+            android:hint="@string/password"
+            android:textSize="20sp"
+            android:gravity="bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/login_edit_background"
+            android:padding="10dp"
+            android:importantForAutofill="no"
+            tools:ignore="TextFields" />
+
+        <Button
+            android:id="@+id/logInButton"
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/log_in_button_background"
+            android:text="@string/login"
+            android:textAllCaps="false"
+            android:onClick="onClickLogIn"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:id="@+id/textViewForgotPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="@string/forgot_your_password"
+            android:layout_gravity="center"
+            android:onClick="onClickForgotPassword"
+            android:clickable="true"
+            android:focusable="true" />
+
+
+
+
+
+    </LinearLayout>
+
+</ScrollView>
+</LinearLayout>
