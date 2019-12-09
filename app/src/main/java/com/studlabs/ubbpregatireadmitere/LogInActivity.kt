@@ -10,7 +10,9 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
 import androidx.annotation.IdRes
-
+import java.net.URL
+import android.os.StrictMode
+import java.net.URLEncoder
 
 
 @Suppress("SameParameterValue", "UNUSED_PARAMETER")
@@ -23,6 +25,8 @@ class LogInActivity : AppCompatActivity()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         setListeners()
+        val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
+        StrictMode.setThreadPolicy(policy)
     }
 
     private fun setListeners()
@@ -89,8 +93,22 @@ class LogInActivity : AppCompatActivity()
 
     private fun logInServerRequest()
     {
-        Toast.makeText(this, "Not Implemented yet!", Toast.LENGTH_SHORT).show()
-        val intent = Intent(this, MainActivity::class.java)
-        startActivity(intent)
+        if(sendGetRequest(bind<EditText>(R.id.textEditUserName).text.toString(),bind<EditText>(R.id.textEditPassword).text.toString()))
+        {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
+        else
+        {
+            Toast.makeText(this, "User does not exist", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun sendGetRequest(userName:String, password:String) : Boolean
+    {
+        var reqParam = URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(userName, "UTF-8")
+        reqParam += "&" + URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(password, "UTF-8")
+        val response = URL("http://192.168.100.234:8089//api//users?$reqParam").readText()
+        return response == "true"
     }
 }
