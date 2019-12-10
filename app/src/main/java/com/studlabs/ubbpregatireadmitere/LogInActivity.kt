@@ -12,14 +12,17 @@ import android.widget.Toast
 import androidx.annotation.IdRes
 import java.net.URL
 import android.os.StrictMode
+import java.net.SocketTimeoutException
 import java.net.URLEncoder
 
 
 @Suppress("SameParameterValue", "UNUSED_PARAMETER")
 class LogInActivity : AppCompatActivity()
 {
-    private val resetPassURL = "http://www.google.com"
 
+    private val resetPassURL = "http://www.google.com"
+    var m_userName = ""
+    var m_password = ""
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
@@ -100,15 +103,25 @@ class LogInActivity : AppCompatActivity()
         }
         else
         {
-            Toast.makeText(this, "User does not exist", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "User does not exist.", Toast.LENGTH_SHORT).show()
         }
     }
 
     private fun sendGetRequest(userName:String, password:String) : Boolean
     {
-        var reqParam = URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(userName, "UTF-8")
-        reqParam += "&" + URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(password, "UTF-8")
-        val response = URL("http://192.168.100.234:8089//api//users?$reqParam").readText()
-        return response == "true"
+        return try
+        {
+            m_userName = userName
+            m_password = password
+            var reqParam = URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(userName, "UTF-8")
+            reqParam += "&" + URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(password, "UTF-8")
+            val response = URL("http://172.20.10.3:8014//api//users?$reqParam").readText()
+            response == "true"
+        }
+        catch(ex: SocketTimeoutException)
+        {
+            Toast.makeText(this, "Cannot connect to server.", Toast.LENGTH_SHORT).show()
+            false
+        }
     }
 }
