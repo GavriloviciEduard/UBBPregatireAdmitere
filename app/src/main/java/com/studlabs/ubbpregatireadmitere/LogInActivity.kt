@@ -10,24 +10,31 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
 import androidx.annotation.IdRes
-
+import java.net.URL
+import android.os.StrictMode
+import java.net.SocketTimeoutException
+import java.net.URLEncoder
 
 
 @Suppress("SameParameterValue", "UNUSED_PARAMETER")
 class LogInActivity : AppCompatActivity()
 {
-    private val resetPassURL = "http://www.google.com"
 
+    private val resetPassURL = "http://www.google.com"
+    var m_userName = ""
+    var m_password = ""
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         setListeners()
+        val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
+        StrictMode.setThreadPolicy(policy)
     }
 
     private fun setListeners()
     {
-        bind<EditText>(R.id.textEditUserName).onFocusChangeListener = View.OnFocusChangeListener{
+        bind<EditText>(R.id.textEditUserName).onFocusChangeListener = View.OnFocusChangeListener {
                 v, hasFocus ->  if (!hasFocus)  { hideKeyboard(v) } }
         bind<EditText>(R.id.textEditPassword).onFocusChangeListener = View.OnFocusChangeListener {
                 v, hasFocus ->  if (!hasFocus)  { hideKeyboard(v) } }
@@ -89,8 +96,32 @@ class LogInActivity : AppCompatActivity()
 
     private fun logInServerRequest()
     {
-        Toast.makeText(this, "Not Implemented yet!", Toast.LENGTH_SHORT).show()
-        val intent = Intent(this, MainActivity::class.java)
-        startActivity(intent)
+        if(sendGetRequest(bind<EditText>(R.id.textEditUserName).text.toString(),bind<EditText>(R.id.textEditPassword).text.toString()))
+        {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
+        else
+        {
+            Toast.makeText(this, "User does not exist.", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun sendGetRequest(userName:String, password:String) : Boolean
+    {
+        return try
+        {
+            m_userName = userName
+            m_password = password
+            var reqParam = URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(userName, "UTF-8")
+            reqParam += "&" + URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(password, "UTF-8")
+            val response = URL("http://172.20.10.3:8014//api//users?$reqParam").readText()
+            response == "true"
+        }
+        catch(ex: SocketTimeoutException)
+        {
+            Toast.makeText(this, "Cannot connect to server.", Toast.LENGTH_SHORT).show()
+            false
+        }
     }
 }
