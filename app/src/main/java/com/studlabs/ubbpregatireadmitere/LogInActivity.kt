@@ -21,8 +21,9 @@ class LogInActivity : AppCompatActivity()
 {
 
     private val resetPassURL = "http://www.google.com"
-    var m_userName = ""
-    var m_password = ""
+    private var mUsername = ""
+    private var mPassword = ""
+
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
@@ -109,10 +110,12 @@ class LogInActivity : AppCompatActivity()
 
     private fun sendGetRequest(userName:String, password:String) : Boolean
     {
+        return true
         return try
         {
-            m_userName = userName
-            m_password = password
+            mUsername = userName
+            mPassword = password
+
             var reqParam = URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(userName, "UTF-8")
             reqParam += "&" + URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(password, "UTF-8")
             val response = URL("http://172.20.10.3:8014//api//users?$reqParam").readText()
