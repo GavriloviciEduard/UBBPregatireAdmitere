@@ -9,4 +9,10 @@
     <string name="profile">Profile</string>
     <string name="problems">Problems</string>
     <string name="forum">Forum</string>
+    <string name="e_mail">E-mail</string>
+    <string name="codes">Codes</string>
+    <string name="posts">Posts</string>
+    <string name="progress">Progress</string>
+    <string name="profilepic">profilepic</string>
+    <string name="profilepiccontent">profilePicContent</string>
 </resources>
