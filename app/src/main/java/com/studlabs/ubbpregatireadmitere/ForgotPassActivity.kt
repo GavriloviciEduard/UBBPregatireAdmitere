@@ -8,6 +8,8 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
 import androidx.annotation.IdRes
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 import org.json.JSONObject
 import java.io.BufferedReader
 import java.io.InputStreamReader
@@ -16,7 +18,8 @@ import java.net.HttpURLConnection
 import java.net.URL
 
 @Suppress("SameParameterValue", "UNUSED_PARAMETER")
-class ForgotPassActivity : AppCompatActivity() {
+class ForgotPassActivity : AppCompatActivity()
+{
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -57,34 +60,38 @@ class ForgotPassActivity : AppCompatActivity() {
     }
     private fun sendPostRequest(email:String)
     {
-        val mURL = URL("https://login-proiect-colectiv.herokuapp.com/login/api/forgot-password")
-        val rootObject= JSONObject()
-        rootObject.put("email",email)
-        try
-        {
-            with(mURL.openConnection() as HttpURLConnection)
+        doAsync {
+            val mURL = URL("http://188.26.72.103:3000/studlabs/api/forgot-password")
+            val rootObject= JSONObject()
+            rootObject.put("email",email)
+            try
             {
-                setRequestProperty("Content-Type", "application/json")
-                requestMethod = "POST"
-                val wr = OutputStreamWriter(outputStream)
-                wr.write(rootObject.toString())
-                wr.flush()
-                BufferedReader(InputStreamReader(inputStream)).use {
-                    val response = StringBuffer()
-                    var inputLine = it.readLine()
-                    while (inputLine != null)
-                    {
-                        response.append(inputLine)
-                        inputLine = it.readLine()
-                    }
-                    it.close()
+                with(mURL.openConnection() as HttpURLConnection)
+                {
+                    setRequestProperty("Content-Type", "application/json")
+                    requestMethod = "POST"
+                    val wr = OutputStreamWriter(outputStream)
+                    wr.write(rootObject.toString())
+                    wr.flush()
+                    BufferedReader(InputStreamReader(inputStream)).use {
+                        val response = StringBuffer()
+                        var inputLine = it.readLine()
+                        while (inputLine != null)
+                        {
+                            response.append(inputLine)
+                            inputLine = it.readLine()
+                        }
+                        it.close()
+                        uiThread { finish() }
 
+                    }
                 }
             }
-        }
-        catch (ex:Exception)
-        {
-            println(ex.toString())
+            catch (ex:Exception)
+            {
+                uiThread { finish() }
+                println(ex.toString())
+            }
         }
     }
 
