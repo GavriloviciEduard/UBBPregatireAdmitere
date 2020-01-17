@@ -18,10 +18,10 @@ class MainActivity : AppCompatActivity()
         setContentView(R.layout.activity_main)
 
         val tabAdapter = TabAdapter(supportFragmentManager)
-        tabAdapter.addFragment(Profile(),"Profile")
-        tabAdapter.addFragment(Quizzes(), "Quizzes")
-        tabAdapter.addFragment(News(), "Problems")
-        tabAdapter.addFragment(Forum(), "Forum")
+        tabAdapter.addFragment(Profile(),"")
+        tabAdapter.addFragment(Quizzes(), "")
+        tabAdapter.addFragment(News(), "")
+        tabAdapter.addFragment(Forum(), "")
 
         viewpager_main.adapter = tabAdapter
         tabs_main.setupWithViewPager(viewpager_main)
