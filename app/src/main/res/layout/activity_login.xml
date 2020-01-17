@@ -63,7 +63,6 @@
             android:background="@drawable/login_edit_background"
             android:padding="10dp"
             android:importantForAutofill="no"
-
             tools:ignore="TextFields" />
 
 
@@ -77,6 +76,16 @@
             android:text="@string/login"
             android:textAllCaps="false"
             android:onClick="onClickLogIn"
+            android:textSize="20sp"/>
+        <Button
+            android:id="@+id/RegisterButton"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/log_in_button_background"
+            android:text="@string/register"
+            android:textAllCaps="false"
+            android:onClick="onClickRegister"
             android:textSize="20sp"/>
 
         <TextView

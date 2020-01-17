@@ -1,26 +1,28 @@
 package com.studlabs.ubbpregatireadmitere
 
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import android.app.Activity
 import android.content.Intent
-import android.net.Uri
+import android.os.Bundle
+import android.os.StrictMode
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
 import androidx.annotation.IdRes
+import androidx.appcompat.app.AppCompatActivity
+import org.json.JSONObject
+import java.io.BufferedReader
+import java.io.InputStreamReader
+import java.io.OutputStreamWriter
+import java.net.HttpURLConnection
 import java.net.URL
-import android.os.StrictMode
-import java.net.SocketTimeoutException
-import java.net.URLEncoder
-
 
 @Suppress("SameParameterValue", "UNUSED_PARAMETER")
 class LogInActivity : AppCompatActivity()
 {
 
     private val resetPassURL = "http://www.google.com"
+    private var token = ""
     private var mUsername = ""
     private var mPassword = ""
 
@@ -54,17 +56,10 @@ class LogInActivity : AppCompatActivity()
         return findViewById(res)
     }
 
-
-    private fun openURL(url: String)
-    {
-        val openURL = Intent(Intent.ACTION_VIEW)
-        openURL.data = Uri.parse(url)
-        startActivity(openURL)
-    }
-
     fun onClickForgotPassword(view: View)
     {
-        openURL(resetPassURL)
+        val intent = Intent(this, ForgotPassActivity::class.java)
+        startActivity(intent)
     }
 
     fun onClickLogIn(view: View)
@@ -97,7 +92,7 @@ class LogInActivity : AppCompatActivity()
 
     private fun logInServerRequest()
     {
-        if(sendGetRequest(bind<EditText>(R.id.textEditUserName).text.toString(),bind<EditText>(R.id.textEditPassword).text.toString()))
+        if(sendPostRequest(bind<EditText>(R.id.textEditUserName).text.toString(),bind<EditText>(R.id.textEditPassword).text.toString()))
         {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
@@ -108,23 +103,47 @@ class LogInActivity : AppCompatActivity()
         }
     }
 
-    private fun sendGetRequest(userName:String, password:String) : Boolean
+    private fun sendPostRequest(userName:String, password:String) : Boolean
     {
-        return true
-        return try
-        {
+            val mURL = URL("https://login-proiect-colectiv.herokuapp.com/login/api/auth")
+            val rootObject= JSONObject()
+            rootObject.put("username",userName)
+            rootObject.put("password",password)
             mUsername = userName
             mPassword = password
+            try
+            {
+                with(mURL.openConnection() as HttpURLConnection)
+                {
+                    setRequestProperty("Content-Type", "application/json")
+                    requestMethod = "POST"
+                    val wr = OutputStreamWriter(outputStream)
+                    wr.write(rootObject.toString())
+                    wr.flush()
+                    BufferedReader(InputStreamReader(inputStream)).use {
+                        val response = StringBuffer()
+                        var inputLine = it.readLine()
+                        while (inputLine != null)
+                        {
+                            response.append(inputLine)
+                            inputLine = it.readLine()
+                        }
+                        val responseObject = JSONObject(response.toString())
+                        token = responseObject.get("accessToken").toString()
+                        it.close()
+                        return true
+                  }
+              }
+          }
+          catch (ex:Exception)
+          {
+              return false
+          }
+    }
 
-            var reqParam = URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(userName, "UTF-8")
-            reqParam += "&" + URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(password, "UTF-8")
-            val response = URL("http://172.20.10.3:8014//api//users?$reqParam").readText()
-            response == "true"
-        }
-        catch(ex: SocketTimeoutException)
-        {
-            Toast.makeText(this, "Cannot connect to server.", Toast.LENGTH_SHORT).show()
-            false
-        }
+    fun onClickRegister(view: View)
+    {
+        val intent = Intent(this, RegisterActivity::class.java)
+        startActivity(intent)
     }
 }
