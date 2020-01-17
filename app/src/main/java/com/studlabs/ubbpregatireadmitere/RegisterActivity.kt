@@ -8,6 +8,8 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 import org.json.JSONObject
 import java.io.BufferedReader
 import java.io.InputStreamReader
@@ -104,37 +106,41 @@ class RegisterActivity : AppCompatActivity()
         email: String
     )
     {
-        val mURL = URL("https://login-proiect-colectiv.herokuapp.com/login/api/register")
-        val rootObject = JSONObject()
-        rootObject.put("email", email)
-        rootObject.put("firstName", FirstName)
-        rootObject.put("lastName", LastName)
-        rootObject.put("password", password)
-        rootObject.put("username", userName)
-        try
-        {
-            with(mURL.openConnection() as HttpURLConnection)
+        doAsync {
+            val mURL = URL("http://188.26.72.103:3000/studlabs/api/register")
+            val rootObject = JSONObject()
+            rootObject.put("email", email)
+            rootObject.put("firstName", FirstName)
+            rootObject.put("lastName", LastName)
+            rootObject.put("password", password)
+            rootObject.put("username", userName)
+            try
             {
-                setRequestProperty("Content-Type", "application/json")
-                requestMethod = "POST"
-                val wr = OutputStreamWriter(outputStream)
-                wr.write(rootObject.toString())
-                wr.flush()
-                BufferedReader(InputStreamReader(inputStream)).use {
-                    val response = StringBuffer()
-                    var inputLine = it.readLine()
-                    while (inputLine != null)
-                    {
-                        response.append(inputLine)
-                        inputLine = it.readLine()
+                with(mURL.openConnection() as HttpURLConnection)
+                {
+                    setRequestProperty("Content-Type", "application/json")
+                    requestMethod = "POST"
+                    val wr = OutputStreamWriter(outputStream)
+                    wr.write(rootObject.toString())
+                    wr.flush()
+                    BufferedReader(InputStreamReader(inputStream)).use {
+                        val response = StringBuffer()
+                        var inputLine = it.readLine()
+                        while (inputLine != null)
+                        {
+                            response.append(inputLine)
+                            inputLine = it.readLine()
+                        }
+                        uiThread { finish() }
+                        it.close()
                     }
-                    it.close()
                 }
             }
-        }
-        catch (ex: Exception)
-        {
-            println(ex.toString())
+            catch (ex: Exception)
+            {
+                uiThread { finish() }
+                println(ex.toString())
+            }
         }
     }
 }
