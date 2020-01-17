@@ -14,8 +14,6 @@ import androidx.appcompat.app.AlertDialog
 
 class MainActivity : AppCompatActivity()
 {
-    private val  tabAdapter = TabAdapter(supportFragmentManager)
-
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
@@ -25,18 +23,6 @@ class MainActivity : AppCompatActivity()
 
     private fun createTabAdapter()
     {
-        tabAdapter.addFragment(ProfileFragment(),"")
-        tabAdapter.addFragment(QuizzesFragment(), "")
-        tabAdapter.addFragment(ProblemsFragment(), "")
-        tabAdapter.addFragment(ForumFragment(), "")
-
-        viewpager_main.adapter = tabAdapter
-        tabs_main.setupWithViewPager(viewpager_main)
-
-        tabs_main.getTabAt(0)?.setIcon(R.drawable.ic_profile)
-        tabs_main.getTabAt(1)?.setIcon(R.drawable.ic_quiz)
-        tabs_main.getTabAt(2)?.setIcon(R.drawable.ic_problems)
-        tabs_main.getTabAt(3)?.setIcon(R.drawable.ic_forum)
     }
 
     override fun onBackPressed()
