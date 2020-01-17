@@ -15,4 +15,12 @@
     <string name="progress">Progress</string>
     <string name="profilepic">profilepic</string>
     <string name="profilepiccontent">profilePicContent</string>
+    <string name="save">Save</string>
+    <string name="email">Email</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="register">Register</string>
+    <string name="reset">Reset</string>
+    <string name="full_name">Full Name</string>
+    <string name="user_name">User Name</string>
 </resources>
