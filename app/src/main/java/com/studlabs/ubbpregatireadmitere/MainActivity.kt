@@ -32,11 +32,6 @@ class MainActivity : AppCompatActivity()
         tabs_main.getTabAt(3)?.setIcon(R.drawable.ic_forum)
     }
 
-    private fun createTabAdapter()
-    {
-
-    }
-
     override fun onBackPressed()
     {
         logOutDialog()
@@ -50,11 +45,5 @@ class MainActivity : AppCompatActivity()
             .setPositiveButton(android.R.string.yes) { _, _ -> finish() }
             .setNegativeButton(android.R.string.no) { _, _ -> return@setNegativeButton  }
             .show()
-    }
-
-    private fun <T : View> Activity.bind(@IdRes res : Int) : T
-    {
-        @Suppress("UNCHECKED_CAST")
-        return findViewById(res)
     }
 }
