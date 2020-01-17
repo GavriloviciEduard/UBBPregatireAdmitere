@@ -3,18 +3,10 @@ package com.studlabs.ubbpregatireadmitere
 import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Window
 import kotlinx.android.synthetic.main.activity_main.*
-import androidx.core.app.ComponentActivity
-import androidx.core.app.ComponentActivity.ExtraData
-import androidx.core.content.ContextCompat.getSystemService
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import android.view.View
-import android.widget.EditText
-import android.widget.Toast
 import androidx.annotation.IdRes
 import androidx.appcompat.app.AlertDialog
-import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
 
 
@@ -26,10 +18,10 @@ class MainActivity : AppCompatActivity()
         setContentView(R.layout.activity_main)
 
         val tabAdapter = TabAdapter(supportFragmentManager)
-        tabAdapter.addFragment(ProfileFragment(),"Profile")
-        tabAdapter.addFragment(QuizzesFragment(), "Quizzes")
-        tabAdapter.addFragment(ProblemsFragment(), "Problems")
-        tabAdapter.addFragment(ForumFragment(), "Forum")
+        tabAdapter.addFragment(Profile(),"Profile")
+        tabAdapter.addFragment(Quizzes(), "Quizzes")
+        tabAdapter.addFragment(News(), "Problems")
+        tabAdapter.addFragment(Forum(), "Forum")
 
         viewpager_main.adapter = tabAdapter
         tabs_main.setupWithViewPager(viewpager_main)

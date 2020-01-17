@@ -6,10 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 
-class ForumFragment : Fragment()
+class News : Fragment()
 {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
-        return inflater.inflate(R.layout.fragment_forum, container, false)
+        return inflater.inflate(R.layout.fragment_problems, container, false)
     }
 }
