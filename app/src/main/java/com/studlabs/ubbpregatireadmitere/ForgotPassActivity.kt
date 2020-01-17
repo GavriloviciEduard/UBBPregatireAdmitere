@@ -18,7 +18,7 @@ import java.net.HttpURLConnection
 import java.net.URL
 
 @Suppress("SameParameterValue", "UNUSED_PARAMETER")
-class ForgotPassActivity : AppCompatActivity()
+class   ForgotPassActivity : AppCompatActivity()
 {
 
     override fun onCreate(savedInstanceState: Bundle?)

@@ -115,13 +115,13 @@ class LogInActivity : AppCompatActivity() {
         }
     }
 
-    fun logIn() {
+    private fun logIn() {
         bind<ProgressBar>(R.id.progressBar).visibility = View.INVISIBLE
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
     }
 
-    fun showToast(str: String) {
+    private fun showToast(str: String) {
         bind<ProgressBar>(R.id.progressBar).visibility = View.INVISIBLE
         Toast.makeText(this, str, Toast.LENGTH_SHORT).show()
     }

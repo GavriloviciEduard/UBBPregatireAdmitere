@@ -1,15 +1,13 @@
 package com.studlabs.ubbpregatireadmitere
 
+import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Window
 import kotlinx.android.synthetic.main.activity_main.*
-import androidx.core.app.ComponentActivity
-import androidx.core.app.ComponentActivity.ExtraData
-import androidx.core.content.ContextCompat.getSystemService
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
-import android.widget.Toast
+import android.view.View
+import androidx.annotation.IdRes
 import androidx.appcompat.app.AlertDialog
+import com.google.android.material.tabs.TabLayout
 
 
 class MainActivity : AppCompatActivity()
@@ -18,11 +16,20 @@ class MainActivity : AppCompatActivity()
     {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        createTabAdapter()
-    }
 
-    private fun createTabAdapter()
-    {
+        val tabAdapter = TabAdapter(supportFragmentManager)
+        tabAdapter.addFragment(Profile(),"")
+        tabAdapter.addFragment(Quizzes(), "")
+        tabAdapter.addFragment(News(), "")
+        tabAdapter.addFragment(Forum(), "")
+
+        viewpager_main.adapter = tabAdapter
+        tabs_main.setupWithViewPager(viewpager_main)
+
+        tabs_main.getTabAt(0)?.setIcon(R.drawable.ic_profile)
+        tabs_main.getTabAt(1)?.setIcon(R.drawable.ic_quiz)
+        tabs_main.getTabAt(2)?.setIcon(R.drawable.ic_problems)
+        tabs_main.getTabAt(3)?.setIcon(R.drawable.ic_forum)
     }
 
     override fun onBackPressed()
