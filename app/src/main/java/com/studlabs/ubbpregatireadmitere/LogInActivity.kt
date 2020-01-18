@@ -22,9 +22,11 @@ import java.net.URL
 
 @Suppress("SameParameterValue", "UNUSED_PARAMETER", "DEPRECATION")
 class LogInActivity : AppCompatActivity() {
-    private var token = ""
-    private var mUsername = ""
-    private var mPassword = ""
+    companion object {
+        var token = ""
+        var mUsername = ""
+        var mPassword = ""
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
