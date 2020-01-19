@@ -1,4 +1,4 @@
-package com.studlabs.ubbpregatireadmitere
+package com.studlabs.ubbpregatireadmitere.login
 
 import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
@@ -8,6 +8,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
 import androidx.annotation.IdRes
+import com.studlabs.ubbpregatireadmitere.R
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import org.json.JSONObject

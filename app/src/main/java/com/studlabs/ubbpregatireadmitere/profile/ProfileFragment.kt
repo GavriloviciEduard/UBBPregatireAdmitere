@@ -1,4 +1,4 @@
-package com.studlabs.ubbpregatireadmitere
+package com.studlabs.ubbpregatireadmitere.profile
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,6 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.studlabs.ubbpregatireadmitere.login.LogInActivity
+import com.studlabs.ubbpregatireadmitere.R
+import com.studlabs.ubbpregatireadmitere.login.ResetPassActivity
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import java.io.BufferedReader
@@ -15,7 +18,7 @@ import java.net.HttpURLConnection
 import java.net.URL
 
 
-class Profile : Fragment() {
+class ProfileFragment : Fragment() {
 
     private var mFullName = ""
     private var mEmail = ""

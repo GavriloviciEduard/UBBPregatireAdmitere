@@ -3,19 +3,27 @@ package com.studlabs.ubbpregatireadmitere
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.studlabs.ubbpregatireadmitere.forum.ForumFragment
+import com.studlabs.ubbpregatireadmitere.news.NewsFragment
+import com.studlabs.ubbpregatireadmitere.profile.ProfileFragment
+import com.studlabs.ubbpregatireadmitere.quiz.QuizFragment
+import com.studlabs.ubbpregatireadmitere.utils.TabAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val tabAdapter = TabAdapter(supportFragmentManager)
-        tabAdapter.addFragment(Profile(), "")
-        tabAdapter.addFragment(Quizzes(), "")
-        tabAdapter.addFragment(News(), "")
-        tabAdapter.addFragment(Forum(), "")
+        val tabAdapter = TabAdapter(
+            supportFragmentManager
+        )
+        tabAdapter.addFragment(ProfileFragment(), "")
+        tabAdapter.addFragment(QuizFragment(), "")
+        tabAdapter.addFragment(NewsFragment(), "")
+        tabAdapter.addFragment(ForumFragment(), "")
 
         viewpager_main.adapter = tabAdapter
         tabs_main.setupWithViewPager(viewpager_main)

@@ -1,13 +1,17 @@
-package com.studlabs.ubbpregatireadmitere
+package com.studlabs.ubbpregatireadmitere.quiz
 
-import android.content.Context
 import android.content.Intent
-import android.graphics.Rect
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.studlabs.ubbpregatireadmitere.login.LogInActivity
+import com.studlabs.ubbpregatireadmitere.quiz.Data.AnswerData
+import com.studlabs.ubbpregatireadmitere.quiz.Data.QuestionData
+import com.studlabs.ubbpregatireadmitere.quiz.Data.QuizData
+import com.studlabs.ubbpregatireadmitere.R
+import com.studlabs.ubbpregatireadmitere.utils.RecyclerItemClickListener
+import com.studlabs.ubbpregatireadmitere.utils.TopSpacingItemDecoration
 import kotlinx.android.synthetic.main.fragment_quizzes.view.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
@@ -17,14 +21,14 @@ import java.io.InputStreamReader
 import java.net.HttpURLConnection
 import java.net.URL
 
-class Quizzes : Fragment() {
+class QuizFragment : Fragment() {
+
     private lateinit var rootView: View
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var quizAdapter: QuizAdapter
+    private lateinit var quizAdapter: QuizRecyclerAdapter
+    private lateinit var quizzes: List<QuizData>
 
     companion object {
-        lateinit var questions: List<Question>
-        private lateinit var quizes: List<Quiz>
+        lateinit var questions: List<QuestionData>
     }
 
     override fun onCreateView(
@@ -33,77 +37,89 @@ class Quizzes : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         rootView = inflater.inflate(R.layout.fragment_quizzes, container, false)
-        recyclerView = rootView.findViewById(R.id.recyclerViewQuiz)
         initRecyclerView()
-        rootView.recyclerViewQuiz.adapter = quizAdapter
-        getQuizzes()
+        getQuizzesRequest()
         return rootView
     }
 
     private fun initRecyclerView(){
         rootView.recyclerViewQuiz.apply {
             rootView.recyclerViewQuiz.layoutManager = LinearLayoutManager(context)
-            val topSpacingItemDecoration = TopSpacingItemDecoration(30)
+            val topSpacingItemDecoration =
+                TopSpacingItemDecoration(
+                    30
+                )
             addItemDecoration(topSpacingItemDecoration)
-            quizAdapter = QuizAdapter()
+            quizAdapter = QuizRecyclerAdapter()
             rootView.recyclerViewQuiz.adapter = quizAdapter
-            recyclerView.addOnItemTouchListener(
-                RecyclerItemClickListenr(context, rootView.recyclerViewQuiz, object : RecyclerItemClickListenr.OnItemClickListener {
-                    override fun onItemClick(view: View, position: Int) {
-                        val intent = Intent(activity, QuizActivity::class.java)
-                        questions = quizes[position].questions
-                        startActivity(intent)
-                    }
+            rootView.recyclerViewQuiz.setHasFixedSize(true)
+            rootView.recyclerViewQuiz.addOnItemTouchListener(
+                RecyclerItemClickListener(
+                    context,
+                    rootView.recyclerViewQuiz,
+                    object :
+                        RecyclerItemClickListener.OnItemClickListener {
+                        override fun onItemClick(view: View, position: Int) {
+                            val intent = Intent(activity, QuizOpenActivity::class.java)
+                            questions = quizzes[position].questions
+                            startActivity(intent)
+                        }
 
-                    override fun onItemLongClick(view: View?, position: Int) {
-                        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-                    }
-                })
+                        override fun onItemLongClick(view: View?, position: Int) {
+                        }
+                    })
             )
         }
     }
 
-
-    private fun populateView(jsonString: String): MutableList<Quiz>  {
+    private fun populateView(jsonString: String): MutableList<QuizData>  {
         val quizArray = JSONArray(jsonString)
-        val quizList: MutableList<Quiz> = ArrayList()
-        var i = 0
-        while (i < quizArray.length()) {
+        val quizList: MutableList<QuizData> = ArrayList()
+        for(i in 0 until quizArray.length()) {
             var obj = quizArray.getJSONObject(i)
-            println(i)
-            i++
             val idQuiz = obj.getInt("id")
             val nameQuiz = obj.getString("name")
             val difficultyQuiz = obj.getString("difficulty")
-            val quiz = Quiz(idQuiz, nameQuiz.toString(), difficultyQuiz.toString())
+            val quiz = QuizData(
+                idQuiz,
+                nameQuiz.toString(),
+                difficultyQuiz.toString(),
+                ArrayList()
+            )
             val questionArray = obj.getJSONArray("questions")
-            var j = 0
-            while (j < questionArray.length()) {
+            for(j in 0 until questionArray.length()) {
                 obj = questionArray.getJSONObject(j)
-                j++
                 val idQuestion = obj.getInt("id")
                 val contentQuestion = obj.getString("content")
-                val question = Question(idQuestion, contentQuestion)
+                val question =
+                    QuestionData(
+                        idQuestion,
+                        contentQuestion,
+                        ArrayList()
+                    )
                 val answerArray = obj.getJSONArray("answers")
-                var k = 0
-                while (k < answerArray.length()) {
+                for(k in 0 until answerArray.length()) {
                     obj = answerArray.getJSONObject(k)
-                    k++
                     val idAnswer = obj.getInt("id")
                     val contentAnswer = obj.getString("content")
                     val correctAnswer = obj.getBoolean("correct")
-                    val answer = Answer(idAnswer, contentAnswer, correctAnswer)
+                    val answer =
+                        AnswerData(
+                            idAnswer,
+                            contentAnswer,
+                            correctAnswer
+                        )
                     question.answers.add(answer)
                 }
                 quiz.questions.add(question)
             }
             quizList.add(quiz)
         }
-        quizes = quizList
+        quizzes = quizList
         return quizList
     }
 
-    private fun getQuizzes() {
+    private fun getQuizzesRequest() {
         doAsync {
             val mURL = URL("http://188.26.72.103:3000/studlabs/quiz/all")
             try {

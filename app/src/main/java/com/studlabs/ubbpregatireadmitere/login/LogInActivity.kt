@@ -1,4 +1,4 @@
-package com.studlabs.ubbpregatireadmitere
+package com.studlabs.ubbpregatireadmitere.login
 
 import android.app.Activity
 import android.content.Intent
@@ -10,6 +10,8 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
+import com.studlabs.ubbpregatireadmitere.MainActivity
+import com.studlabs.ubbpregatireadmitere.R
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import org.json.JSONObject
@@ -71,7 +73,9 @@ class LogInActivity : AppCompatActivity() {
     }
 
     private fun logInEvent() {
-        if (bind<EditText>(R.id.textEditUserName).text.isEmpty() && bind<EditText>(R.id.textEditPassword).text.isEmpty()) {
+        if (bind<EditText>(R.id.textEditUserName).text.isEmpty() && bind<EditText>(
+                R.id.textEditPassword
+            ).text.isEmpty()) {
             showToast("Credentials must not be empty!")
         } else if (bind<EditText>(R.id.textEditUserName).text.isEmpty()) {
             showToast("Username must not be empty!")
@@ -84,12 +88,20 @@ class LogInActivity : AppCompatActivity() {
 
     private fun logInRequest() {
         doAsync {
-            mUsername = bind<EditText>(R.id.textEditUserName).text.toString()
-            mPassword = bind<EditText>(R.id.textEditPassword).text.toString()
+            mUsername = bind<EditText>(
+                R.id.textEditUserName
+            ).text.toString()
+            mPassword = bind<EditText>(
+                R.id.textEditPassword
+            ).text.toString()
             val mURL = URL("http://188.26.72.103:3000/studlabs/api/auth")
             val rootObject = JSONObject()
-            rootObject.put("username", mUsername)
-            rootObject.put("password", mPassword)
+            rootObject.put("username",
+                mUsername
+            )
+            rootObject.put("password",
+                mPassword
+            )
             try {
                 with(mURL.openConnection() as HttpURLConnection)
                 {

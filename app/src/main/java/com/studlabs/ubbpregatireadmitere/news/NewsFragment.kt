@@ -1,4 +1,4 @@
-package com.studlabs.ubbpregatireadmitere
+package com.studlabs.ubbpregatireadmitere.news
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,6 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.studlabs.ubbpregatireadmitere.*
+import com.studlabs.ubbpregatireadmitere.login.LogInActivity
+import com.studlabs.ubbpregatireadmitere.news.Data.NewsData
+import com.studlabs.ubbpregatireadmitere.utils.RecyclerItemClickListener
+import com.studlabs.ubbpregatireadmitere.utils.TopSpacingItemDecoration
 import kotlinx.android.synthetic.main.fragment_news.view.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
@@ -17,7 +22,7 @@ import java.net.HttpURLConnection
 import java.net.URL
 
 
-class News : Fragment() {
+class NewsFragment : Fragment() {
 
     companion object {
         val data = ArrayList<NewsData>()
@@ -46,20 +51,29 @@ class News : Fragment() {
     private fun initRecyclerView() {
         rootView.recycler_view.apply {
             rootView.recycler_view.layoutManager = LinearLayoutManager(context)
-            val topSpacingItemDecoration = TopSpacingItemDecoration(30)
+            val topSpacingItemDecoration =
+                TopSpacingItemDecoration(
+                    30
+                )
             addItemDecoration(topSpacingItemDecoration)
-            newsAdapter = NewsRecyclerAdapter()
+            newsAdapter =
+                NewsRecyclerAdapter()
             rootView.recycler_view.adapter = newsAdapter
             rootView.recycler_view.setHasFixedSize(true)
             rootView.recycler_view.addOnItemTouchListener(
-                RecyclerItemClickListenr(
+                RecyclerItemClickListener(
                     context,
                     rootView.recycler_view,
-                    object : RecyclerItemClickListenr.OnItemClickListener {
+                    object :
+                        RecyclerItemClickListener.OnItemClickListener {
 
                         override fun onItemClick(view: View, position: Int) {
-                            mPosition = position
-                            val intent = Intent(activity, NewsOpenActivity::class.java)
+                            mPosition =
+                                position
+                            val intent = Intent(
+                                activity,
+                                NewsOpenActivity::class.java
+                            )
                             startActivity(intent)
                         }
 

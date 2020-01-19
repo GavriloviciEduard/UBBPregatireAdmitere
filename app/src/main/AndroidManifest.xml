@@ -15,12 +15,12 @@
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning"
         tools:targetApi="m">
-        <activity android:name=".NewsOpenActivity"></activity>
-        <activity android:name=".ResetPassActivity" />
-        <activity android:name=".ForgotPassActivity" />
-        <activity android:name=".RegisterActivity" />
+        <activity android:name=".news.NewsOpenActivity"></activity>
+        <activity android:name=".login.ResetPassActivity" />
+        <activity android:name=".login.ForgotPassActivity" />
+        <activity android:name=".login.RegisterActivity" />
         <activity
-            android:name=".LogInActivity"
+            android:name=".login.LogInActivity"
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -38,7 +38,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".QuizActivity">
+            android:name=".quiz.QuizOpenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

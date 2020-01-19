@@ -1,23 +1,28 @@
-package com.studlabs.ubbpregatireadmitere
+package com.studlabs.ubbpregatireadmitere.quiz
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.quiz_layout.view.*
+import com.studlabs.ubbpregatireadmitere.quiz.Data.QuizData
+import com.studlabs.ubbpregatireadmitere.R
+import kotlinx.android.synthetic.main.layout_list_quiz.view.*
 
-class QuizAdapter : RecyclerView.Adapter<QuizAdapter.QuizViewHolder>() {
-    private var items: List<Quiz> = ArrayList()
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QuizViewHolder {
+class QuizRecyclerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+    private var items: List<QuizData> = ArrayList()
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return QuizViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.quiz_layout, parent, false)
+            LayoutInflater.from(parent.context).inflate(
+                R.layout.layout_list_quiz,
+                parent,
+                false
+            )
         )
     }
 
-    override fun onBindViewHolder(holder: QuizViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when(holder) {
             is QuizViewHolder -> {
                 holder.bind(items[position])
@@ -25,7 +30,7 @@ class QuizAdapter : RecyclerView.Adapter<QuizAdapter.QuizViewHolder>() {
         }
     }
 
-    fun submitList(newsList: List<Quiz>) {
+    fun submitList(newsList: List<QuizData>) {
         items = newsList
     }
 
@@ -40,7 +45,7 @@ class QuizAdapter : RecyclerView.Adapter<QuizAdapter.QuizViewHolder>() {
         private val difficulty: TextView = itemView.difficulty
         private val numberOfQuestions: TextView = itemView.numberOfQuestions
 
-        fun bind(quiz: Quiz) {
+        fun bind(quiz: QuizData) {
             name.text = quiz.name
             difficulty.text = "Difficulty: " + quiz.difficulty
             numberOfQuestions.text = "Number of questions: " + quiz.questions.count().toString()

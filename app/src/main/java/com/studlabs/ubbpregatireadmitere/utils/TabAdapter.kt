@@ -1,4 +1,4 @@
-package com.studlabs.ubbpregatireadmitere
+package com.studlabs.ubbpregatireadmitere.utils
 
 import androidx.annotation.Nullable
 import androidx.fragment.app.Fragment
@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 
 class TabAdapter internal constructor(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
+
     private val mFragmentList = ArrayList<Fragment>()
     private val mFragmentTitleList = ArrayList<String>()
     override fun getCount(): Int {

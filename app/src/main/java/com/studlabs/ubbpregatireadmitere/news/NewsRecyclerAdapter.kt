@@ -1,4 +1,4 @@
-package com.studlabs.ubbpregatireadmitere
+package com.studlabs.ubbpregatireadmitere.news
 
 import android.graphics.Typeface
 import android.view.LayoutInflater
@@ -6,14 +6,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.layout_list_item.view.*
+import com.studlabs.ubbpregatireadmitere.news.Data.NewsData
+import com.studlabs.ubbpregatireadmitere.R
+import kotlinx.android.synthetic.main.layout_list_news.view.*
 
 class NewsRecyclerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var items: List<NewsData> = ArrayList()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return NewsViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.layout_list_item, parent, false)
+            LayoutInflater.from(parent.context).inflate(
+                R.layout.layout_list_news,
+                parent,
+                false
+            )
         )
     }
 

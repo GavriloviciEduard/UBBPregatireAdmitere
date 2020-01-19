@@ -1,22 +1,22 @@
-package com.studlabs.ubbpregatireadmitere
+package com.studlabs.ubbpregatireadmitere.quiz
 
 import android.os.Bundle
-import android.view.View
-import android.widget.CheckBox
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.studlabs.ubbpregatireadmitere.quiz.Data.QuestionData
+import com.studlabs.ubbpregatireadmitere.R
 
-class QuizActivity : AppCompatActivity() {
+class QuizOpenActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var questionAdapter: QuestionAdapter
-    private lateinit var mQuestions: List<Question>
+    private lateinit var questionAdapter: QuestionRecyclerAdapter
+    private lateinit var mQuestions: List<QuestionData>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        this.mQuestions = Quizzes.questions
-        setContentView(R.layout.activity_quiz)
+        this.mQuestions = QuizFragment.questions
+        setContentView(R.layout.activity_quiz_open)
         recyclerView = findViewById(R.id.questionRecyclerView)
         initRecyclerView()
         questionAdapter.submitList(mQuestions)
@@ -26,7 +26,7 @@ class QuizActivity : AppCompatActivity() {
     private fun initRecyclerView() {
         recyclerView.apply {
             recyclerView.layoutManager = LinearLayoutManager(context)
-            questionAdapter = QuestionAdapter()
+            questionAdapter = QuestionRecyclerAdapter()
             recyclerView.adapter = questionAdapter
         }
     }
