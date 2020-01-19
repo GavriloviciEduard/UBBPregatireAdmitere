@@ -29,30 +29,23 @@
             app:layout_constraintVertical_bias="0.0">
 
             <TextView
-                android:id="@+id/name"
+                android:id="@+id/content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text=""
+                android:text="Question"
                 android:textColor="#000"
                 android:textSize="19sp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/difficulty"
+            <LinearLayout
+                android:id="@+id/vertical_layout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text=""
-                android:textSize="15sp" />
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/numberOfQuestions"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text=""
-                android:textSize="15sp" />
 
+
+            </LinearLayout>
 
         </LinearLayout>
 
