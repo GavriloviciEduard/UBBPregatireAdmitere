@@ -24,4 +24,6 @@
     <string name="new_password">New password</string>
     <string name="logo">logo</string>
     <string name="reset_password">Reset password</string>
+    <string name="title">Title</string>
+    <string name="date">Date</string>
 </resources>

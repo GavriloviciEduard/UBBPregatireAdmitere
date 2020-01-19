@@ -24,7 +24,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="23dp"
-                android:text="Adalin Sclavu"
+                android:text=""
                 android:textColor="#fff"
                 android:textStyle="bold"
                 android:textSize="25sp"/>
@@ -83,29 +83,6 @@
                 tools:ignore="RtlSymmetry" />
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_marginTop="25dp"
-            android:orientation="horizontal"
-            android:paddingStart="25dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/card_background"
-            tools:ignore="RtlSymmetry,UseCompoundDrawables">
-            <ImageView
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:src="@drawable/quiz"
-                tools:ignore="ContentDescription" />
-            <TextView
-                android:textStyle="bold"
-                android:id="@+id/textEditQuizProfile"
-                android:layout_gravity="center_vertical"
-                android:layout_width="wrap_content"
-                android:textSize="20sp"
-                android:layout_height="wrap_content"
-                android:paddingStart="20dp"
-                tools:ignore="RtlSymmetry" />
-        </LinearLayout>
 
     </LinearLayout>
 
