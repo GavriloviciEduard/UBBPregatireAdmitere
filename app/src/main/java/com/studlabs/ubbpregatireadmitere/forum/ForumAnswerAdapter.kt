@@ -1,10 +1,11 @@
-package com.studlabs.ubbpregatireadmitere
+package com.studlabs.ubbpregatireadmitere.forum
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.studlabs.ubbpregatireadmitere.R
 import kotlinx.android.synthetic.main.forum_answer_list.view.*
 
 class ForumAnswerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -12,7 +13,11 @@ class ForumAnswerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var items: List<ForumAnswerModel> = ArrayList()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return ForumAnswerHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.forum_answer_list, parent, false)
+            LayoutInflater.from(parent.context).inflate(
+                R.layout.forum_answer_list,
+                parent,
+                false
+            )
         )
     }
 

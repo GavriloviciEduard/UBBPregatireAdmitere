@@ -99,7 +99,11 @@ class ForumFragment : Fragment() {
 
                             for (j in 0 until commentsArray.length()) {
                                 val element1 = quizArray.getJSONObject(j)
-                                comments.add(Comment(element1.get("text").toString()))
+                                comments.add(
+                                    Comment(
+                                        element1.get("text").toString()
+                                    )
+                                )
                             }
                             data.add(
                                 ForumModel(

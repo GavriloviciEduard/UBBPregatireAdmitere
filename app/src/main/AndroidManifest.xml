@@ -19,8 +19,8 @@
         <activity android:name=".login.ResetPassActivity" />
         <activity android:name=".login.ForgotPassActivity" />
         <activity android:name=".login.RegisterActivity" />
-        <activity android:name=".QuestionActivity" />
-        <activity android:name=".ForumAnswers"/>
+        <activity android:name=".forum.QuestionActivity" />
+        <activity android:name=".forum.ForumAnswers"/>
         <activity
             android:name=".login.LogInActivity"
             android:theme="@style/AppTheme">

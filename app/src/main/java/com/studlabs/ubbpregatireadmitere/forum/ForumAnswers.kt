@@ -1,11 +1,9 @@
-package com.studlabs.ubbpregatireadmitere
+package com.studlabs.ubbpregatireadmitere.forum
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.studlabs.ubbpregatireadmitere.forum.ForumFragment
+import com.studlabs.ubbpregatireadmitere.R
 import com.studlabs.ubbpregatireadmitere.utils.TopSpacingItemDecoration
 import kotlinx.android.synthetic.main.activity_forum_answers.*
 import kotlinx.android.synthetic.main.fragment_forum.view.*
