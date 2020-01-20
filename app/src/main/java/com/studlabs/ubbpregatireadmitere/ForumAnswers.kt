@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.os.PersistableBundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.studlabs.ubbpregatireadmitere.forum.ForumFragment
+import com.studlabs.ubbpregatireadmitere.utils.TopSpacingItemDecoration
 import kotlinx.android.synthetic.main.activity_forum_answers.*
 import kotlinx.android.synthetic.main.fragment_forum.view.*
 
@@ -17,13 +19,13 @@ class ForumAnswers : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_forum_answers)
         initRecyclerView()
-        forum_answer_description.text = Forum.data[Forum.mPosition].description
+        forum_answer_description.text = ForumFragment.data[ForumFragment.mPosition].description
         addDataSet()
     }
 
     private fun addDataSet(){
         val comments = ArrayList<ForumAnswerModel>()
-        for(el in Forum.data[Forum.mPosition].comments) {
+        for(el in ForumFragment.data[ForumFragment.mPosition].comments) {
             comments.add(ForumAnswerModel(el.body))
         }
         forumAdapter.submitList(comments)

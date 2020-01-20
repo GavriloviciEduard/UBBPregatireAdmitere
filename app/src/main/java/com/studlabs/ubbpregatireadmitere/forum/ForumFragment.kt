@@ -1,6 +1,5 @@
-package com.studlabs.ubbpregatireadmitere
+package com.studlabs.ubbpregatireadmitere.forum
 
-import RecyclerItemClickListenr
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,6 +8,10 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.studlabs.ubbpregatireadmitere.*
+import com.studlabs.ubbpregatireadmitere.login.LogInActivity
+import com.studlabs.ubbpregatireadmitere.utils.RecyclerItemClickListener
+import com.studlabs.ubbpregatireadmitere.utils.TopSpacingItemDecoration
 import kotlinx.android.synthetic.main.fragment_forum.view.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
@@ -18,8 +21,7 @@ import java.io.InputStreamReader
 import java.net.HttpURLConnection
 import java.net.URL
 
-class Forum : Fragment() {
-
+class ForumFragment : Fragment() {
     private lateinit var rootView: View
     private lateinit var forumAdapter: ForumRecyclerAdapter
 
@@ -56,10 +58,10 @@ class Forum : Fragment() {
             rootView.recycler_view.adapter = forumAdapter
             rootView.recycler_view.setHasFixedSize(true)
             rootView.recycler_view.addOnItemTouchListener(
-                RecyclerItemClickListenr(
+                RecyclerItemClickListener(
                     context,
                     rootView.recycler_view,
-                    object : RecyclerItemClickListenr.OnItemClickListener {
+                    object : RecyclerItemClickListener.OnItemClickListener {
 
                         override fun onItemClick(view: View, position: Int) {
                             mPosition = position

@@ -1,4 +1,4 @@
-package com.studlabs.ubbpregatireadmitere
+package com.studlabs.ubbpregatireadmitere.login
 
 import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
@@ -8,6 +8,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
 import androidx.annotation.IdRes
+import com.studlabs.ubbpregatireadmitere.R
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import org.json.JSONObject
@@ -18,54 +19,48 @@ import java.net.HttpURLConnection
 import java.net.URL
 
 @Suppress("SameParameterValue", "UNUSED_PARAMETER")
-class   ForgotPassActivity : AppCompatActivity()
-{
+class ForgotPassActivity : AppCompatActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?)
-    {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_forgot_pass)
         setListeners()
     }
 
-    private fun setListeners()
-    {
-        bind<EditText>(R.id.textEditEmailReset).onFocusChangeListener = View.OnFocusChangeListener {
-                v, hasFocus ->  if (!hasFocus)  { hideKeyboard(v) } }
+    private fun setListeners() {
+        bind<EditText>(R.id.textEditEmailReset).onFocusChangeListener =
+            View.OnFocusChangeListener { v, hasFocus ->
+                if (!hasFocus) {
+                    hideKeyboard(v)
+                }
+            }
     }
 
-    private fun hideKeyboard(view: View)
-    {
+    private fun hideKeyboard(view: View) {
         val inputMethodManager =
             getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
-    private fun <T : View> Activity.bind(@IdRes res : Int) : T
-    {
+    private fun <T : View> Activity.bind(@IdRes res: Int): T {
         @Suppress("UNCHECKED_CAST")
         return findViewById(res)
     }
 
-    fun onClickReset(view: View)
-    {
-        if(bind<EditText>(R.id.textEditEmailReset).text.isEmpty())
-        {
+    fun onClickReset(view: View) {
+        if (bind<EditText>(R.id.textEditEmailReset).text.isEmpty()) {
             Toast.makeText(this, "Email must not be empty!", Toast.LENGTH_SHORT).show()
-        }
-        else
-        {
+        } else {
             sendPostRequest(bind<EditText>(R.id.textEditEmailReset).text.toString())
         }
     }
-    private fun sendPostRequest(email:String)
-    {
+
+    private fun sendPostRequest(email: String) {
         doAsync {
             val mURL = URL("http://188.26.72.103:3000/studlabs/api/forgot-password")
-            val rootObject= JSONObject()
-            rootObject.put("email",email)
-            try
-            {
+            val rootObject = JSONObject()
+            rootObject.put("email", email)
+            try {
                 with(mURL.openConnection() as HttpURLConnection)
                 {
                     setRequestProperty("Content-Type", "application/json")
@@ -76,8 +71,7 @@ class   ForgotPassActivity : AppCompatActivity()
                     BufferedReader(InputStreamReader(inputStream)).use {
                         val response = StringBuffer()
                         var inputLine = it.readLine()
-                        while (inputLine != null)
-                        {
+                        while (inputLine != null) {
                             response.append(inputLine)
                             inputLine = it.readLine()
                         }
@@ -86,13 +80,10 @@ class   ForgotPassActivity : AppCompatActivity()
 
                     }
                 }
-            }
-            catch (ex:Exception)
-            {
+            } catch (ex: Exception) {
                 uiThread { finish() }
                 println(ex.toString())
             }
         }
     }
-
 }
