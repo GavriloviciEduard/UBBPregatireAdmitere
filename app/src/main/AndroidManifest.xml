@@ -15,7 +15,9 @@
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning"
         tools:targetApi="m">
-        <activity android:name=".ForgotPassActivity"></activity>
+        <activity android:name=".QuestionActivity"></activity>
+        <activity android:name=".ForumAnswers" />
+        <activity android:name=".ForgotPassActivity" />
         <activity android:name=".RegisterActivity" />
         <activity
             android:name=".LogInActivity"

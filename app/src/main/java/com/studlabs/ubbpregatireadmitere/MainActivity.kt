@@ -30,6 +30,8 @@ class MainActivity : AppCompatActivity()
         tabs_main.getTabAt(1)?.setIcon(R.drawable.ic_quiz)
         tabs_main.getTabAt(2)?.setIcon(R.drawable.ic_problems)
         tabs_main.getTabAt(3)?.setIcon(R.drawable.ic_forum)
+
+
     }
 
     override fun onBackPressed()

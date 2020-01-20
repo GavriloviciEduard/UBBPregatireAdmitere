@@ -23,4 +23,11 @@
     <string name="reset">Reset</string>
     <string name="full_name">Full Name</string>
     <string name="user_name">User Name</string>
+    <string name="search">Search...</string>
+    <string name="cancel">Cancel</string>
+    <string name="submit">Submit</string>
+    <string name="title_question">Title question</string>
+    <string name="question_title">Question title</string>
+    <string name="question_body">Question body</string>
+    <string name="answer_body">Answer body</string>
 </resources>
